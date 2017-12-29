@@ -21,8 +21,8 @@ class Member(MethodResource):
         return Model.query.get_or_404(id)
 
     @doc(
-        summary="Modify a particular member",
-        description="""Modifies a member record with a given id with
+        summary="Modify a member",
+        description="""Modifies a member record with a given ID to match
         the data in the request body."""
     )
     @auth_required
@@ -34,7 +34,6 @@ class Member(MethodResource):
         for field in att_data:
             setattr(att, field, att_data[field])
 
-        db.session.add(att)
         db.session.commit()
 
         return att
