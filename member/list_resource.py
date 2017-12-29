@@ -1,7 +1,6 @@
-from flask_restful import Resource
 from auth import auth_required
-from flask import request
 
+from flask import request
 from flask_apispec import use_kwargs, marshal_with, doc
 from flask_apispec.views import MethodResource
 
@@ -9,7 +8,7 @@ from .model import Model
 from .schema import Schema
 from app import db
 
-@doc(tags=['members'])
+@doc(tags=['Members'])
 class MemberList(MethodResource):
 
     @doc(
