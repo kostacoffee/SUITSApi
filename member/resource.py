@@ -20,5 +20,22 @@ class Member(MethodResource):
     def get(self, id):
         return Model.query.get_or_404(id)
 
+    @doc(
+        summary="Modify a member",
+        description="""Modifies a member record with a given ID to match
+        the data in the request body."""
+    )
+    @auth_required
+    @use_kwargs(Schema)
+    @marshal_with(Schema)
+    def put(self, id, **att_data):
+        att = Model.query.get_or_404(id)
+
+        for field in att_data:
+            setattr(att, field, att_data[field])
+
+        db.session.commit()
+
+        return att
 
 
